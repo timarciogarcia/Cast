@@ -1,4 +1,4 @@
-package config;
+package br.com.cast.avaliacao.config;
 
 import java.text.ParseException;
 
@@ -11,14 +11,20 @@ import br.com.cast.avaliacao.service.DbService;
 
 @Configuration
 @Profile("test")
-public class ConfigTest {
+public class TestConfig {
 
 	@Autowired
 	private DbService dbService;
 
 	@Bean
-	public void instanciaBaseDeDados() throws ParseException {
-		this.dbService.instanciaBaseDeDados();
+	public void instanciaBaseDeDados(){
+		try {
+			System.out.println("Open Instancia");
+			this.dbService.instanciaBaseDeDados();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

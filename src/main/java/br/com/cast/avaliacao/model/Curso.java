@@ -1,9 +1,10 @@
 package br.com.cast.avaliacao.model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,9 +20,16 @@ public class Curso implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	@Column(nullable = false, length = 100)
 	private String descricao;
-	private LocalDate dtinicio;
-	private LocalDate dtfim;
+
+	@Column(nullable = false)
+	private Date dtinicio;
+
+	@Column(nullable = false)
+	private Date dtfim;
+
+	@Column(nullable = true)
 	private Integer qtdealunos;
 
 	@ManyToOne
@@ -32,8 +40,7 @@ public class Curso implements Serializable {
 		super();
 	}
 
-	public Curso(Integer id, String descricao, LocalDate dtinicio, LocalDate dtfim, Integer qtdealunos,
-			Categoria categoria) {
+	public Curso(Integer id, String descricao, Date dtinicio, Date dtfim, Integer qtdealunos, Categoria categoria) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -59,19 +66,19 @@ public class Curso implements Serializable {
 		this.descricao = descricao;
 	}
 
-	public LocalDate getDtinicio() {
+	public Date getDtinicio() {
 		return dtinicio;
 	}
 
-	public void setDtinicio(LocalDate dtinicio) {
+	public void setDtinicio(Date dtinicio) {
 		this.dtinicio = dtinicio;
 	}
 
-	public LocalDate getDtfim() {
+	public Date getDtfim() {
 		return dtfim;
 	}
 
-	public void setDtfim(LocalDate dtfim) {
+	public void setDtfim(Date dtfim) {
 		this.dtfim = dtfim;
 	}
 

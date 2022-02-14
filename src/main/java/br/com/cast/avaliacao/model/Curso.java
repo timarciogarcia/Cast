@@ -30,7 +30,6 @@ public class Curso implements Serializable {
 
 	public Curso() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Curso(Integer id, String descricao, LocalDate dtinicio, LocalDate dtfim, Integer qtdealunos,

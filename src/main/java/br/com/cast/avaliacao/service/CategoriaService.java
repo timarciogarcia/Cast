@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import br.com.cast.avaliacao.dto.CategoriaDto;
@@ -22,12 +23,12 @@ public class CategoriaService {
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não Encontrado! id:" + id + " ,Tipo: " + Categoria.class.getName()));
 	}
-	
-	public List<Categoria> findAll(){
+
+	public List<Categoria> findAll() {
 		return repository.findAll();
 	}
-	
-	public Categoria create(Categoria obj){
+
+	public Categoria create(Categoria obj) {
 		obj.setId(null);
 		return repository.save(obj);
 	}
@@ -40,7 +41,12 @@ public class CategoriaService {
 
 	public void delete(Integer id) {
 		findByid(id);
-		repository.deleteById(id);
+		try {
+			repository.deleteById(id);
+		} catch (DataIntegrityViolationException e) {
+			throw new br.com.cast.avaliacao.service.exception.DataIntegrityViolationException(
+					"Esta categoria não pode ser deletada, pois possui cursos associados !!!");
+		}
 	}
 
 }

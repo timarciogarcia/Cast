@@ -27,6 +27,7 @@ public class DbService {
 		Categoria cat2 = new Categoria(null, "Programação");
 		Categoria cat3 = new Categoria(null, "Qualidade");
 		Categoria cat4 = new Categoria(null, "Processos");
+		Categoria cat5 = new Categoria(null, "Processos PODE APAGAR");
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		Date dtinicial = sdf.parse("14/02/2022");
@@ -38,7 +39,7 @@ public class DbService {
 		Curso cur4 = new Curso(null, "Curso de QA", dtinicial, dtfinal, 10, cat4);
 		Curso cur5 = new Curso(null, "Curso de Metodo Agil", dtinicial, dtfinal, 10, cat3);
 
-		this.categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4));
+		this.categoriaRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5));
 		this.cursoRepository.saveAll(Arrays.asList(cur1, cur2, cur3, cur4, cur5));
 	}
 

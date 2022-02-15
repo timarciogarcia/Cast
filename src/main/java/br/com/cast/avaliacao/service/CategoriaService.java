@@ -38,4 +38,9 @@ public class CategoriaService {
 		return repository.save(obj);
 	}
 
+	public void delete(Integer id) {
+		findByid(id);
+		repository.deleteById(id);
+	}
+
 }

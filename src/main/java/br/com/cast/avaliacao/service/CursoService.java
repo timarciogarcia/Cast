@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.cast.avaliacao.dto.CursoDto;
 import br.com.cast.avaliacao.model.Curso;
 import br.com.cast.avaliacao.repository.CursoRepository;
 import br.com.cast.avaliacao.service.exception.ObjectNotFoundException;
@@ -30,20 +31,31 @@ public class CursoService {
 		return repository.findAllbyCategoria(id_cat);
 	}
 	
+	public Curso update(Integer id, CursoDto objDto) {
+		Curso obj = this.findByid(id);
+		updateData(obj, objDto);
+		return repository.save(obj);
+	}
+
+	private void updateData(Curso obj, CursoDto objDto) {
+		obj.setDescricao(objDto.getDescricao());
+		obj.setDtfim(objDto.getDtfim());
+		obj.setDtinicio(objDto.getDtinicio());
+		obj.setQtdealunos(objDto.getQtdealunos());		
+	}
+
+	
 	/*
+	 * 	
+
+	 * 
+	 * 
+	 * 
 	public Curso create(Curso obj) {
 		obj.setId(null);
 		return repository.save(obj);
 	}
 
-	public Curso update(Integer id, CursoDto objDto) {
-		Curso obj = this.findByid(id);
-		obj.setDescricao(objDto.getDescricao());
-		obj.setDtfim(objDto.getDtfim());
-		obj.setDtinicio(objDto.getDtinicio());
-		obj.setQtdealunos(objDto.getQtdealunos());
-		return repository.save(obj);
-	}
 
 	public void delete(Integer id) {
 		findByid(id);

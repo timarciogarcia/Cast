@@ -5,10 +5,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import br.com.cast.avaliacao.dto.CursoDto;
+import br.com.cast.avaliacao.model.Categoria;
 import br.com.cast.avaliacao.model.Curso;
 import br.com.cast.avaliacao.repository.CursoRepository;
+import br.com.cast.avaliacao.service.exception.DataIntegrityViolationException;
 import br.com.cast.avaliacao.service.exception.ObjectNotFoundException;
 
 @Service
@@ -44,27 +45,17 @@ public class CursoService {
 		obj.setQtdealunos(objDto.getQtdealunos());		
 	}
 
-	
-	/*
-	 * 	
-
-	 * 
-	 * 
-	 * 
-	public Curso create(Curso obj) {
+	public Curso create(Integer id_cat, Curso obj) {
 		obj.setId(null);
+		Categoria cat = categoriaService.findByid(id_cat);
+		obj.setCategoria(cat);
 		return repository.save(obj);
 	}
 
-
+	
 	public void delete(Integer id) {
 		findByid(id);
-		try {
-			repository.deleteById(id);
-		} catch (DataIntegrityViolationException e) {
-			throw new br.com.cast.avaliacao.service.exception.DataIntegrityViolationException(
-					"Esta categoria não pode ser deletada, pois possui cursos associados !!!");
-		}
-	}*/
+     	repository.deleteById(id);
+	}
 
 }
